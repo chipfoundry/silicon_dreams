@@ -37,8 +37,10 @@ jobs:
       - name: GL test
         uses: TinyTapeout/tt-gds-action/gl_test@ttsky25b
         with:
-          make_target: "fault"
+          make_target: "fault"  # Run 'make fault' instead of default
         env:
+          # The fault target sets MODULE internally, but we need to ensure
+          # the test modules are discoverable
           COCOTB_TEST_MODULES: "fault_injection.test_floor_b2_reset,fault_injection.test_floor_5_seu,fault_injection.test_floor_1_input"
           PYTHONPATH: ${{ github.workspace }}:${{ github.workspace }}/harness
 
